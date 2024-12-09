@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CameraMetadata</string>
+
+    <string name="noCameraSettings">No camera settings</string>
+    <string name="iso">ISO</string>
+    <string name="shutterSpeed">Shutter speed</string>
+    <string name="unavailable">Unavailable</string>
+
+    <string name="showNextCapturedImage">Show next captured image</string>
+
+    <string name="capturedImageContentDescription">Latest captured image</string>
+</resources>
