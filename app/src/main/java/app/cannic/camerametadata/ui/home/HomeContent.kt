@@ -15,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -56,7 +57,7 @@ fun HomeContent() {
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
-            remember {
+            val cameraCapture = remember {
                 CameraCapture(
                     context = context,
                     lifecycleOwner = lifecycleOwner,
@@ -70,8 +71,13 @@ fun HomeContent() {
                         }
                         imageProxyWithMetadata.imageProxy.close()
                     }
-                ).apply {
-                    startCapture()
+                )
+            }
+
+            DisposableEffect(Unit) {
+                cameraCapture.startCapture()
+                onDispose {
+                    cameraCapture.stopCapture()
                 }
             }
 
