@@ -46,14 +46,14 @@ class CameraCapture(
             try {
                 with(cameraProviderFuture.get()) {
                     cameraProvider = this
-                        this.unbindAll()
-                        this.bindToLifecycle(
-                            lifecycleOwner = lifecycleOwner,
-                            cameraSelector = CameraSelector.Builder()
-                                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                                .build(),
-                            imageAnalysis
-                        )
+                    this.unbindAll()
+                    this.bindToLifecycle(
+                        lifecycleOwner = lifecycleOwner,
+                        cameraSelector = CameraSelector.Builder()
+                            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                            .build(),
+                        imageAnalysis
+                    )
                 }
             } catch (e: Exception) {
                 Log.e("CameraCapture", "Failed to bind camera: ${e.message}")
