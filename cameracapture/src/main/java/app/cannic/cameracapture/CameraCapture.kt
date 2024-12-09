@@ -43,20 +43,20 @@ class CameraCapture(
                     onNewImage(imageProxyWithMetadata)
                 }
             )
-            with(cameraProviderFuture.get()) {
-                cameraProvider = this
-                try {
-                    this.unbindAll()
-                    this.bindToLifecycle(
-                        lifecycleOwner = lifecycleOwner,
-                        cameraSelector = CameraSelector.Builder()
-                            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                            .build(),
-                        imageAnalysis
-                    )
-                } catch (e: Exception) {
-                    Log.e("CameraCapture", "Failed to bind camera: ${e.message}")
+            try {
+                with(cameraProviderFuture.get()) {
+                    cameraProvider = this
+                        this.unbindAll()
+                        this.bindToLifecycle(
+                            lifecycleOwner = lifecycleOwner,
+                            cameraSelector = CameraSelector.Builder()
+                                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                                .build(),
+                            imageAnalysis
+                        )
                 }
+            } catch (e: Exception) {
+                Log.e("CameraCapture", "Failed to bind camera: ${e.message}")
             }
         }, ContextCompat.getMainExecutor(context))
     }
